@@ -1,0 +1,512 @@
+title: Simulation Lab
+
+views:
+
+  # ==========================================================
+  # VIEW 1 — OVERVIEW
+  # ==========================================================
+
+  - title: Overview
+    path: overview
+    icon: mdi:home-assistant
+
+    cards:
+
+      # ------------------------------------------------------
+      # HOME MODE
+      # ------------------------------------------------------
+
+      - type: entities
+        title: 🏠 Home State
+        icon: mdi:home
+        show_header_toggle: false
+        state_color: true
+        entities:
+
+          - entity: input_select.home_mode
+            name: Current Mode
+
+          - type: divider
+
+          - entity: group.all_lights
+            name: All Lights
+
+          - entity: group.living_room_lights
+            name: Living Room
+
+          - entity: group.bedroom_lights
+            name: Bedroom
+
+          - entity: group.office_lights
+            name: Office
+
+          - entity: group.kitchen_lights
+            name: Kitchen
+
+          - entity: group.entrance_lights
+            name: Entrance
+
+
+      # ------------------------------------------------------
+      # AUTOMATION STATUS
+      # ------------------------------------------------------
+
+      - type: entities
+        title: ⚡ Automations
+        icon: mdi:robot
+        show_header_toggle: true
+        state_color: true
+        entities:
+
+          - entity: automation.mode_controller
+            name: Mode Controller
+            secondary_info: last-triggered
+
+          - entity: automation.motion_lux_living_room
+            name: Motion + Lux → Light
+            secondary_info: last-triggered
+
+          - entity: automation.auto_turn_off_living_room
+            name: Auto Turn Off Living Room
+            secondary_info: last-triggered
+
+
+      # ------------------------------------------------------
+      # SENSOR SUMMARY
+      # ------------------------------------------------------
+
+      - type: glance
+        title: 📡 Sensors
+        columns: 5
+        show_name: true
+        show_state: true
+        state_color: true
+        entities:
+
+          - entity: sensor.living_room_temperature
+            name: Temp
+
+          - entity: sensor.living_room_illuminance
+            name: Lux
+
+          - entity: binary_sensor.living_room_motion
+            name: Motion
+
+          - entity: binary_sensor.bedroom_presence
+            name: Presence
+
+          - entity: binary_sensor.entrance_door
+            name: Door
+
+
+      # ------------------------------------------------------
+      # QUICK LIGHT CONTROL
+      # ------------------------------------------------------
+
+      - type: grid
+        title: 💡 Quick Light Control
+        columns: 2
+        square: false
+
+        cards:
+
+          - type: light
+            entity: light.living_room_ceiling
+            name: Living Ceiling
+
+          - type: light
+            entity: light.living_room_ambient
+            name: Living Ambient
+
+          - type: light
+            entity: light.bedroom_ceiling
+            name: Bedroom
+
+          - type: light
+            entity: light.office_desk
+            name: Office Desk
+
+          - type: light
+            entity: light.kitchen_ceiling
+            name: Kitchen
+
+          - type: light
+            entity: light.entrance_light
+            name: Entrance
+
+
+  # ==========================================================
+  # VIEW 2 — ALL LIGHTS
+  # ==========================================================
+
+  - title: Lights
+    path: lights
+    icon: mdi:lightbulb-group
+
+    cards:
+
+      # ------------------------------------------------------
+      # LIVING ROOM
+      # ------------------------------------------------------
+
+      - type: entities
+        title: 🛋️ Living Room
+        icon: mdi:sofa
+        show_header_toggle: true
+        state_color: true
+
+        entities:
+
+          - entity: light.living_room_ceiling
+            name: Ceiling
+            secondary_info: brightness
+
+          - entity: light.living_room_lamp
+            name: Lamp
+
+          - entity: light.living_room_wall
+            name: Wall
+            secondary_info: brightness
+
+          - entity: light.living_room_floor_lamp
+            name: Floor Lamp
+            secondary_info: brightness
+
+          - entity: light.living_room_ambient
+            name: Ambient
+            secondary_info: brightness
+
+
+      # ------------------------------------------------------
+      # BEDROOM
+      # ------------------------------------------------------
+
+      - type: entities
+        title: 🛏️ Bedroom
+        icon: mdi:bed
+        show_header_toggle: true
+        state_color: true
+
+        entities:
+
+          - entity: light.bedroom_ceiling
+            name: Ceiling
+            secondary_info: brightness
+
+          - entity: light.bedroom_bedside_left
+            name: Bedside Left
+            secondary_info: brightness
+
+          - entity: light.bedroom_bedside_right
+            name: Bedside Right
+            secondary_info: brightness
+
+
+      # ------------------------------------------------------
+      # OFFICE
+      # ------------------------------------------------------
+
+      - type: entities
+        title: 💻 Office
+        icon: mdi:desk
+        show_header_toggle: true
+        state_color: true
+
+        entities:
+
+          - entity: light.office_desk
+            name: Desk Light
+            secondary_info: brightness
+
+          - entity: light.office_monitor
+            name: Monitor Light
+            secondary_info: brightness
+
+
+      # ------------------------------------------------------
+      # KITCHEN
+      # ------------------------------------------------------
+
+      - type: entities
+        title: 🍳 Kitchen
+        icon: mdi:countertop
+        show_header_toggle: true
+        state_color: true
+
+        entities:
+
+          - entity: light.kitchen_ceiling
+            name: Ceiling
+            secondary_info: brightness
+
+          - entity: light.kitchen_counter
+            name: Counter
+            secondary_info: brightness
+
+          - entity: light.kitchen_cabinet
+            name: Cabinet
+            secondary_info: brightness
+
+
+      # ------------------------------------------------------
+      # ENTRANCE
+      # ------------------------------------------------------
+
+      - type: entities
+        title: 🚪 Entrance
+        icon: mdi:door
+        show_header_toggle: true
+        state_color: true
+
+        entities:
+
+          - entity: light.entrance_light
+            name: Entrance
+            secondary_info: brightness
+
+          - entity: light.porch_light
+            name: Porch
+            secondary_info: brightness
+
+
+      # ------------------------------------------------------
+      # BRIGHTNESS BACKEND — LIVING ROOM
+      # ------------------------------------------------------
+
+      - type: entities
+        title: 🔧 Living Room Brightness Backend
+        icon: mdi:tune
+        show_header_toggle: false
+
+        entities:
+
+          - entity: input_number.living_room_ceiling_brightness
+            name: Ceiling
+
+          - entity: input_number.living_room_wall_brightness
+            name: Wall
+
+          - entity: input_number.living_room_floor_brightness
+            name: Floor Lamp
+
+          - entity: input_number.living_room_ambient_brightness
+            name: Ambient
+
+
+      # ------------------------------------------------------
+      # BRIGHTNESS BACKEND — BEDROOM
+      # ------------------------------------------------------
+
+      - type: entities
+        title: 🔧 Bedroom Brightness Backend
+        icon: mdi:tune
+        show_header_toggle: false
+
+        entities:
+
+          - entity: input_number.bedroom_ceiling_brightness
+            name: Ceiling
+
+          - entity: input_number.bedroom_bedside_left_brightness
+            name: Bedside Left
+
+          - entity: input_number.bedroom_bedside_right_brightness
+            name: Bedside Right
+
+
+      # ------------------------------------------------------
+      # BRIGHTNESS BACKEND — OFFICE
+      # ------------------------------------------------------
+
+      - type: entities
+        title: 🔧 Office Brightness Backend
+        icon: mdi:tune
+        show_header_toggle: false
+
+        entities:
+
+          - entity: input_number.office_desk_brightness
+            name: Desk
+
+          - entity: input_number.office_monitor_brightness
+            name: Monitor
+
+
+      # ------------------------------------------------------
+      # BRIGHTNESS BACKEND — KITCHEN
+      # ------------------------------------------------------
+
+      - type: entities
+        title: 🔧 Kitchen Brightness Backend
+        icon: mdi:tune
+        show_header_toggle: false
+
+        entities:
+
+          - entity: input_number.kitchen_ceiling_brightness
+            name: Ceiling
+
+          - entity: input_number.kitchen_counter_brightness
+            name: Counter
+
+          - entity: input_number.kitchen_cabinet_brightness
+            name: Cabinet
+
+
+      # ------------------------------------------------------
+      # BRIGHTNESS BACKEND — ENTRANCE
+      # ------------------------------------------------------
+
+      - type: entities
+        title: 🔧 Entrance Brightness Backend
+        icon: mdi:tune
+        show_header_toggle: false
+
+        entities:
+
+          - entity: input_number.entrance_light_brightness
+            name: Entrance
+
+          - entity: input_number.porch_light_brightness
+            name: Porch
+
+
+  # ==========================================================
+  # VIEW 3 — SIMULATION / DEBUG
+  # ==========================================================
+
+  - title: Debug
+    path: debug
+    icon: mdi:bug
+
+    cards:
+
+      # ------------------------------------------------------
+      # SIMULATION INPUT
+      # ------------------------------------------------------
+
+      - type: entities
+        title: 🧪 Simulation Inputs
+        icon: mdi:flask
+        show_header_toggle: false
+        state_color: true
+
+        entities:
+
+          - type: section
+            label: Environment
+
+          - entity: input_number.living_room_temperature_sim
+            name: Temperature
+
+          - entity: input_number.living_room_illuminance_sim
+            name: Illuminance
+
+
+          - type: section
+            label: Binary Sensors
+
+          - entity: input_boolean.living_room_motion_sim
+            name: Motion Simulation
+
+          - entity: input_boolean.bedroom_presence_sim
+            name: Presence Simulation
+
+          - entity: input_boolean.entrance_door_sim
+            name: Door Simulation
+
+
+      # ------------------------------------------------------
+      # TEMPLATE / SEMANTIC OUTPUT
+      # ------------------------------------------------------
+
+      - type: entities
+        title: 🧩 Template Entity Outputs
+        icon: mdi:function-variant
+        show_header_toggle: false
+        state_color: true
+
+        entities:
+
+          - type: section
+            label: Numeric Sensors
+
+          - entity: sensor.living_room_temperature
+            name: Temperature Output
+            secondary_info: entity-id
+
+          - entity: sensor.living_room_illuminance
+            name: Illuminance Output
+            secondary_info: entity-id
+
+
+          - type: section
+            label: Binary Sensors
+
+          - entity: binary_sensor.living_room_motion
+            name: Motion Output
+            secondary_info: entity-id
+
+          - entity: binary_sensor.bedroom_presence
+            name: Presence Output
+            secondary_info: entity-id
+
+          - entity: binary_sensor.entrance_door
+            name: Door Output
+            secondary_info: entity-id
+
+
+      # ------------------------------------------------------
+      # AUTOMATION DEBUG
+      # ------------------------------------------------------
+
+      - type: entities
+        title: 🤖 Automation Debug
+        icon: mdi:robot-industrial
+        show_header_toggle: true
+        state_color: true
+
+        entities:
+
+          - entity: automation.mode_controller
+            name: Mode Controller
+            secondary_info: last-triggered
+
+          - entity: automation.motion_lux_living_room
+            name: Motion + Lux
+            secondary_info: last-triggered
+
+          - entity: automation.auto_turn_off_living_room
+            name: No Motion → Light Off
+            secondary_info: last-triggered
+
+
+      # ------------------------------------------------------
+      # GROUP DEBUG
+      # ------------------------------------------------------
+
+      - type: entities
+        title: 📦 Groups
+        icon: mdi:group
+        show_header_toggle: false
+        state_color: true
+
+        entities:
+
+          - entity: group.all_lights
+            name: All Lights
+
+          - entity: group.living_room_lights
+            name: Living Room Lights
+
+          - entity: group.bedroom_lights
+            name: Bedroom Lights
+
+          - entity: group.office_lights
+            name: Office Lights
+
+          - entity: group.kitchen_lights
+            name: Kitchen Lights
+
+          - entity: group.entrance_lights
+            name: Entrance Lights

@@ -1,0 +1,479 @@
+# ============================================================
+# LIGHTS
+# ============================================================
+
+- light:
+
+    # --------------------------------------------------------
+    # Living Room
+    # --------------------------------------------------------
+
+    - name: "Living Room Ceiling"
+      unique_id: virtual_living_room_ceiling
+      state: "{{ is_state('input_boolean.living_room_ceiling', 'on') }}"
+      level: >
+        {{ (states('input_number.living_room_ceiling_brightness') | float(100) * 2.55) | int }}
+
+      turn_on:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.living_room_ceiling
+
+      turn_off:
+        - action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.living_room_ceiling
+
+      set_level:
+        - action: input_number.set_value
+          target:
+            entity_id: input_number.living_room_ceiling_brightness
+          data:
+            value: "{{ (brightness / 2.55) | round(0) }}"
+
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.living_room_ceiling
+
+
+    - name: "Living Room Lamp"
+      unique_id: virtual_living_room_lamp
+      state: "{{ is_state('input_boolean.living_room_lamp', 'on') }}"
+
+      turn_on:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.living_room_lamp
+
+      turn_off:
+        - action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.living_room_lamp
+
+
+    - name: "Living Room Wall"
+      unique_id: virtual_living_room_wall
+      state: "{{ is_state('input_boolean.living_room_wall', 'on') }}"
+      level: >
+        {{ (states('input_number.living_room_wall_brightness') | float(100) * 2.55) | int }}
+
+      turn_on:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.living_room_wall
+
+      turn_off:
+        - action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.living_room_wall
+
+      set_level:
+        - action: input_number.set_value
+          target:
+            entity_id: input_number.living_room_wall_brightness
+          data:
+            value: "{{ (brightness / 2.55) | round(0) }}"
+
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.living_room_wall
+
+
+    - name: "Living Room Floor Lamp"
+      unique_id: virtual_living_room_floor
+      state: "{{ is_state('input_boolean.living_room_floor', 'on') }}"
+      level: >
+        {{ (states('input_number.living_room_floor_brightness') | float(100) * 2.55) | int }}
+
+      turn_on:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.living_room_floor
+
+      turn_off:
+        - action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.living_room_floor
+
+      set_level:
+        - action: input_number.set_value
+          target:
+            entity_id: input_number.living_room_floor_brightness
+          data:
+            value: "{{ (brightness / 2.55) | round(0) }}"
+
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.living_room_floor
+
+
+    - name: "Living Room Ambient"
+      unique_id: virtual_living_room_ambient
+      state: "{{ is_state('input_boolean.living_room_ambient', 'on') }}"
+      level: >
+        {{ (states('input_number.living_room_ambient_brightness') | float(100) * 2.55) | int }}
+
+      turn_on:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.living_room_ambient
+
+      turn_off:
+        - action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.living_room_ambient
+
+      set_level:
+        - action: input_number.set_value
+          target:
+            entity_id: input_number.living_room_ambient_brightness
+          data:
+            value: "{{ (brightness / 2.55) | round(0) }}"
+
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.living_room_ambient
+
+
+    # --------------------------------------------------------
+    # Bedroom
+    # --------------------------------------------------------
+
+    - name: "Bedroom Ceiling"
+      unique_id: virtual_bedroom_ceiling
+      state: "{{ is_state('input_boolean.bedroom_ceiling', 'on') }}"
+      level: >
+        {{ (states('input_number.bedroom_ceiling_brightness') | float(100) * 2.55) | int }}
+
+      turn_on:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.bedroom_ceiling
+
+      turn_off:
+        - action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.bedroom_ceiling
+
+      set_level:
+        - action: input_number.set_value
+          target:
+            entity_id: input_number.bedroom_ceiling_brightness
+          data:
+            value: "{{ (brightness / 2.55) | round(0) }}"
+
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.bedroom_ceiling
+
+
+    - name: "Bedroom Bedside Left"
+      unique_id: virtual_bedroom_bedside_left
+      state: "{{ is_state('input_boolean.bedroom_bedside_left', 'on') }}"
+      level: >
+        {{ (states('input_number.bedroom_bedside_left_brightness') | float(100) * 2.55) | int }}
+
+      turn_on:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.bedroom_bedside_left
+
+      turn_off:
+        - action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.bedroom_bedside_left
+
+      set_level:
+        - action: input_number.set_value
+          target:
+            entity_id: input_number.bedroom_bedside_left_brightness
+          data:
+            value: "{{ (brightness / 2.55) | round(0) }}"
+
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.bedroom_bedside_left
+
+
+    - name: "Bedroom Bedside Right"
+      unique_id: virtual_bedroom_bedside_right
+      state: "{{ is_state('input_boolean.bedroom_bedside_right', 'on') }}"
+      level: >
+        {{ (states('input_number.bedroom_bedside_right_brightness') | float(100) * 2.55) | int }}
+
+      turn_on:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.bedroom_bedside_right
+
+      turn_off:
+        - action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.bedroom_bedside_right
+
+      set_level:
+        - action: input_number.set_value
+          target:
+            entity_id: input_number.bedroom_bedside_right_brightness
+          data:
+            value: "{{ (brightness / 2.55) | round(0) }}"
+
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.bedroom_bedside_right
+
+
+    # --------------------------------------------------------
+    # Office
+    # --------------------------------------------------------
+
+    - name: "Office Desk"
+      unique_id: virtual_office_desk
+      state: "{{ is_state('input_boolean.office_desk', 'on') }}"
+      level: >
+        {{ (states('input_number.office_desk_brightness') | float(100) * 2.55) | int }}
+
+      turn_on:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.office_desk
+
+      turn_off:
+        - action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.office_desk
+
+      set_level:
+        - action: input_number.set_value
+          target:
+            entity_id: input_number.office_desk_brightness
+          data:
+            value: "{{ (brightness / 2.55) | round(0) }}"
+
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.office_desk
+
+
+    - name: "Office Monitor"
+      unique_id: virtual_office_monitor
+      state: "{{ is_state('input_boolean.office_monitor', 'on') }}"
+      level: >
+        {{ (states('input_number.office_monitor_brightness') | float(100) * 2.55) | int }}
+
+      turn_on:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.office_monitor
+
+      turn_off:
+        - action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.office_monitor
+
+      set_level:
+        - action: input_number.set_value
+          target:
+            entity_id: input_number.office_monitor_brightness
+          data:
+            value: "{{ (brightness / 2.55) | round(0) }}"
+
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.office_monitor
+
+
+    # --------------------------------------------------------
+    # Kitchen
+    # --------------------------------------------------------
+
+    - name: "Kitchen Ceiling"
+      unique_id: virtual_kitchen_ceiling
+      state: "{{ is_state('input_boolean.kitchen_ceiling', 'on') }}"
+      level: >
+        {{ (states('input_number.kitchen_ceiling_brightness') | float(100) * 2.55) | int }}
+
+      turn_on:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.kitchen_ceiling
+
+      turn_off:
+        - action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.kitchen_ceiling
+
+      set_level:
+        - action: input_number.set_value
+          target:
+            entity_id: input_number.kitchen_ceiling_brightness
+          data:
+            value: "{{ (brightness / 2.55) | round(0) }}"
+
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.kitchen_ceiling
+
+
+    - name: "Kitchen Counter"
+      unique_id: virtual_kitchen_counter
+      state: "{{ is_state('input_boolean.kitchen_counter', 'on') }}"
+      level: >
+        {{ (states('input_number.kitchen_counter_brightness') | float(100) * 2.55) | int }}
+
+      turn_on:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.kitchen_counter
+
+      turn_off:
+        - action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.kitchen_counter
+
+      set_level:
+        - action: input_number.set_value
+          target:
+            entity_id: input_number.kitchen_counter_brightness
+          data:
+            value: "{{ (brightness / 2.55) | round(0) }}"
+
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.kitchen_counter
+
+
+    - name: "Kitchen Cabinet"
+      unique_id: virtual_kitchen_cabinet
+      state: "{{ is_state('input_boolean.kitchen_cabinet', 'on') }}"
+      level: >
+        {{ (states('input_number.kitchen_cabinet_brightness') | float(100) * 2.55) | int }}
+
+      turn_on:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.kitchen_cabinet
+
+      turn_off:
+        - action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.kitchen_cabinet
+
+      set_level:
+        - action: input_number.set_value
+          target:
+            entity_id: input_number.kitchen_cabinet_brightness
+          data:
+            value: "{{ (brightness / 2.55) | round(0) }}"
+
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.kitchen_cabinet
+
+
+    # --------------------------------------------------------
+    # Entrance
+    # --------------------------------------------------------
+
+    - name: "Entrance Light"
+      unique_id: virtual_entrance_light
+      state: "{{ is_state('input_boolean.entrance_light', 'on') }}"
+      level: >
+        {{ (states('input_number.entrance_light_brightness') | float(100) * 2.55) | int }}
+
+      turn_on:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.entrance_light
+
+      turn_off:
+        - action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.entrance_light
+
+      set_level:
+        - action: input_number.set_value
+          target:
+            entity_id: input_number.entrance_light_brightness
+          data:
+            value: "{{ (brightness / 2.55) | round(0) }}"
+
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.entrance_light
+
+
+    - name: "Porch Light"
+      unique_id: virtual_porch_light
+      state: "{{ is_state('input_boolean.porch_light', 'on') }}"
+      level: >
+        {{ (states('input_number.porch_light_brightness') | float(100) * 2.55) | int }}
+
+      turn_on:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.porch_light
+
+      turn_off:
+        - action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.porch_light
+
+      set_level:
+        - action: input_number.set_value
+          target:
+            entity_id: input_number.porch_light_brightness
+          data:
+            value: "{{ (brightness / 2.55) | round(0) }}"
+
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.porch_light
+
+
+# ============================================================
+# SENSORS
+# ============================================================
+
+- sensor:
+
+    - name: "Living Room Temperature"
+      unique_id: virtual_living_room_temperature
+      state: >
+        {{ states('input_number.living_room_temperature_sim') | float(0) }}
+      device_class: temperature
+      state_class: measurement
+      unit_of_measurement: "°C"
+
+    - name: "Living Room Illuminance"
+      unique_id: virtual_living_room_illuminance
+      state: >
+        {{ states('input_number.living_room_illuminance_sim') | float(0) }}
+      device_class: illuminance
+      state_class: measurement
+      unit_of_measurement: "lx"
+
+
+# ============================================================
+# BINARY SENSORS
+# ============================================================
+
+- binary_sensor:
+
+    - name: "Living Room Motion"
+      unique_id: virtual_living_room_motion
+      state: >
+        {{ is_state('input_boolean.living_room_motion_sim', 'on') }}
+      device_class: motion
+
+    - name: "Bedroom Presence"
+      unique_id: virtual_bedroom_presence
+      state: >
+        {{ is_state('input_boolean.bedroom_presence_sim', 'on') }}
+      device_class: occupancy
+
+    - name: "Entrance Door"
+      unique_id: virtual_entrance_door
+      state: >
+        {{ is_state('input_boolean.entrance_door_sim', 'on') }}
+      device_class: door

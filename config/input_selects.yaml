@@ -1,0 +1,10 @@
+home_mode:
+  name: Home Mode
+  options:
+    - Home
+    - Night
+    - Movie
+    - Away
+    - Sleep
+  initial: Home
+  icon: mdi:home

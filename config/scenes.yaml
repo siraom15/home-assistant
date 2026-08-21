@@ -1,0 +1,28 @@
+- id: good_night
+  name: Good Night
+  entities:
+    light.living_room_ceiling: "off"
+    light.living_room_lamp: "off"
+    light.kitchen_ceiling: "off"
+    light.bedroom_ceiling: "on"
+
+- id: movie_time
+  name: Movie Time
+  entities:
+    light.living_room_ceiling: "off"
+    light.living_room_lamp: "on"
+    light.kitchen_ceiling: "off"
+    light.bedroom_ceiling: "off"
+
+- id: leaving_home
+  name: Leaving Home
+  entities:
+    group.all_lights: "off"
+
+- id: welcome_home
+  name: Welcome Home
+  entities:
+    light.living_room_ceiling: "on"
+    light.living_room_lamp: "on"
+    light.kitchen_ceiling: "off"
+    light.bedroom_ceiling: "off"

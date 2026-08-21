@@ -1,0 +1,31 @@
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Frontend
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Helpers / Virtual State
+input_boolean: !include input_booleans.yaml
+input_number: !include input_numbers.yaml
+input_select: !include input_selects.yaml
+
+# Semantic / Virtual Entities
+template: !include template_entities.yaml
+
+# Groups
+group: !include groups.yaml
+
+# Logic
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+lovelace:
+  dashboards:
+    simulation-lab:
+      mode: yaml
+      filename: simulation-dashboard.yaml
+      title: Simulation Lab
+      icon: mdi:flask
+      show_in_sidebar: true

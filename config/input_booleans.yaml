@@ -1,0 +1,84 @@
+# ============================================================
+# Virtual Light States
+# ============================================================
+
+living_room_ceiling:
+  name: Living Room Ceiling Light
+  icon: mdi:ceiling-light
+
+living_room_lamp:
+  name: Living Room Lamp
+  icon: mdi:lamp
+
+living_room_wall:
+  name: Living Room Wall Light
+  icon: mdi:wall-sconce
+
+living_room_floor:
+  name: Living Room Floor Lamp
+  icon: mdi:floor-lamp
+
+living_room_ambient:
+  name: Living Room Ambient Light
+  icon: mdi:led-strip-variant
+
+
+bedroom_ceiling:
+  name: Bedroom Ceiling Light
+  icon: mdi:ceiling-light
+
+bedroom_bedside_left:
+  name: Bedroom Bedside Left
+  icon: mdi:lamp
+
+bedroom_bedside_right:
+  name: Bedroom Bedside Right
+  icon: mdi:lamp
+
+
+office_desk:
+  name: Office Desk Light
+  icon: mdi:desk-lamp
+
+office_monitor:
+  name: Office Monitor Light
+  icon: mdi:monitor
+
+
+kitchen_ceiling:
+  name: Kitchen Ceiling Light
+  icon: mdi:ceiling-light
+
+kitchen_counter:
+  name: Kitchen Counter Light
+  icon: mdi:countertop
+
+kitchen_cabinet:
+  name: Kitchen Cabinet Light
+  icon: mdi:led-strip-variant
+
+
+entrance_light:
+  name: Entrance Light
+  icon: mdi:door-open
+
+porch_light:
+  name: Porch Light
+  icon: mdi:coach-lamp
+
+
+# ============================================================
+# Sensor Simulation States
+# ============================================================
+
+living_room_motion_sim:
+  name: Living Room Motion Simulation
+  icon: mdi:motion-sensor
+
+bedroom_presence_sim:
+  name: Bedroom Presence Simulation
+  icon: mdi:account-check
+
+entrance_door_sim:
+  name: Entrance Door Simulation
+  icon: mdi:door

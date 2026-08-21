@@ -1,0 +1,26 @@
+# Secrets
+secrets.yaml
+
+# Home Assistant runtime
+.storage/
+.cloud/
+
+# Database
+home-assistant_v2.db
+home-assistant_v2.db-shm
+home-assistant_v2.db-wal
+
+# Logs
+home-assistant.log
+home-assistant.log.*
+
+# Runtime files
+.uuid
+.HA_VERSION
+
+# Backup/temp
+*.bak
+*.tmp
+
+# OS
+.DS_Store

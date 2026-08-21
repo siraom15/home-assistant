@@ -1,0 +1,43 @@
+living_room_lights:
+  name: Living Room Lights
+  entities:
+    - light.living_room_ceiling
+    - light.living_room_lamp
+    - light.living_room_wall
+    - light.living_room_floor_lamp
+    - light.living_room_ambient
+
+bedroom_lights:
+  name: Bedroom Lights
+  entities:
+    - light.bedroom_ceiling
+    - light.bedroom_bedside_left
+    - light.bedroom_bedside_right
+
+office_lights:
+  name: Office Lights
+  entities:
+    - light.office_desk
+    - light.office_monitor
+
+kitchen_lights:
+  name: Kitchen Lights
+  entities:
+    - light.kitchen_ceiling
+    - light.kitchen_counter
+    - light.kitchen_cabinet
+
+entrance_lights:
+  name: Entrance Lights
+  entities:
+    - light.entrance_light
+    - light.porch_light
+
+all_lights:
+  name: All Lights
+  entities:
+    - group.living_room_lights
+    - group.bedroom_lights
+    - group.office_lights
+    - group.kitchen_lights
+    - group.entrance_lights

@@ -1,0 +1,43 @@
+activate_home_mode:
+  alias: "Mode - Home"
+  description: "Activate Home mode"
+  sequence:
+    - action: scene.turn_on
+      target:
+        entity_id: scene.welcome_home
+
+
+activate_night_mode:
+  alias: "Mode - Night"
+  description: "Activate Night mode"
+  sequence:
+    - action: scene.turn_on
+      target:
+        entity_id: scene.good_night
+
+
+activate_movie_mode:
+  alias: "Mode - Movie"
+  description: "Activate Movie mode"
+  sequence:
+    - action: scene.turn_on
+      target:
+        entity_id: scene.movie_time
+
+
+activate_away_mode:
+  alias: "Mode - Away"
+  description: "Activate Away mode"
+  sequence:
+    - action: scene.turn_on
+      target:
+        entity_id: scene.leaving_home
+
+
+activate_sleep_mode:
+  alias: "Mode - Sleep"
+  description: "Activate Sleep mode"
+  sequence:
+    - action: scene.turn_on
+      target:
+        entity_id: scene.good_night

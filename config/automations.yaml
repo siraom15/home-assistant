@@ -1,0 +1,119 @@
+- id: mode_controller
+  alias: Mode Controller
+  description: Dispatch actions based on current home mode
+  triggers:
+  - trigger: state
+    entity_id: input_select.home_mode
+  actions:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_select.home_mode
+        state: Home
+      sequence:
+      - action: script.activate_home_mode
+    - conditions:
+      - condition: state
+        entity_id: input_select.home_mode
+        state: Night
+      sequence:
+      - action: script.activate_night_mode
+    - conditions:
+      - condition: state
+        entity_id: input_select.home_mode
+        state: Movie
+      sequence:
+      - action: script.activate_movie_mode
+    - conditions:
+      - condition: state
+        entity_id: input_select.home_mode
+        state: Away
+      sequence:
+      - action: script.activate_away_mode
+    - conditions:
+      - condition: state
+        entity_id: input_select.home_mode
+        state: Sleep
+      sequence:
+      - action: script.activate_sleep_mode
+  mode: restart
+- id: motion_lux_livingroom
+  alias: "Motion Lux Living Room"
+  description: "Turn on living room ceiling at 70% when motion is detected and illuminance is below 100 lx"
+
+  triggers:
+    - trigger: motion.detected
+      target:
+        entity_id: binary_sensor.living_room_motion
+      options:
+        behavior: each
+        for:
+          seconds: 5
+
+  conditions:
+    - condition: numeric_state
+      entity_id: sensor.living_room_illuminance
+      below: 100
+
+  actions:
+    - action: light.turn_on
+      target:
+        entity_id: light.living_room_ceiling
+      data:
+        brightness_pct: 70
+  
+  mode: single
+
+- id: auto_turn_off_living_room
+  alias: "Auto Turn Off Living Room"
+  triggers:
+    - trigger: motion.cleared
+      target: 
+        entity_id: binary_sensor.living_room_motion
+      options:
+        behavior: each
+        for:
+          seconds: 20
+        
+  conditions: []
+  
+  actions:
+  - action: light.turn_off
+    target:
+      entity_id: light.living_room_ceiling
+  
+  mode: restart
+
+- id: auto_turn_on_living_room
+  alias: "Auto Turn On Living Room"
+
+  triggers:
+    - trigger: motion.detected
+      target:
+        entity_id: binary_sensor.living_room_motion
+      options:
+        behavior: each
+        for:
+          seconds: 5
+
+    - trigger: numeric_state
+      entity_id: sensor.living_room_illuminance
+      below: 80
+
+  conditions:
+    - condition: motion.is_detected
+      target:
+        entity_id: binary_sensor.living_room_motion
+
+    - condition: numeric_state
+      entity_id: sensor.living_room_illuminance
+      below: 80
+
+  actions:
+    - action: light.turn_on
+      target:
+        entity_id: light.living_room_ceiling
+      data:
+        brightness_pct: 60
+
+  mode: restart
