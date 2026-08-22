@@ -3,24 +3,30 @@
 import { useState } from "react";
 import type { HAState } from "@/lib/home-assistant/types";
 import { useHAState } from "@/hooks/useHAState";
+import { useHAEntity } from "@/hooks/useHAEntity";
 
 interface LightCardProps {
   entityId: string;
   name: string;
-  initialState: HAState;
 }
 
-export function LightCard({
-  entityId,
-  name,
-  initialState,
-}: LightCardProps) {
+export function LightCard({ entityId, name }: LightCardProps) {
   const [loading, setLoading] = useState(false);
   const [pendingBrightness, setPendingBrightness] = useState<number | null>(
-    null
+    null,
   );
 
-  const light = useHAState(initialState);
+  const light = useHAEntity(entityId);
+
+  if (!light) {
+    return (
+      <div className="rounded-3xl border border-red-200 bg-red-50 p-5">
+        <p className="font-medium text-red-700">Entity not found</p>
+
+        <p className="mt-1 text-xs text-red-500">{entityId}</p>
+      </div>
+    );
+  }
 
   const currentIsOn = light.state === "on";
 
@@ -31,12 +37,9 @@ export function LightCard({
       ? Math.round((rawBrightness / 255) * 100)
       : 100;
 
-  const currentBrightness =
-    pendingBrightness ?? haBrightness;
+  const currentBrightness = pendingBrightness ?? haBrightness;
 
-  async function controlLight(
-    payload: Record<string, unknown>
-  ) {
+  async function controlLight(payload: Record<string, unknown>) {
     setLoading(true);
 
     try {
@@ -51,9 +54,7 @@ export function LightCard({
       if (!response.ok) {
         const body = await response.text();
 
-        throw new Error(
-          `Light control failed ${response.status}: ${body}`
-        );
+        throw new Error(`Light control failed ${response.status}: ${body}`);
       }
 
       return await response.json();
@@ -165,13 +166,9 @@ export function LightCard({
             </div>
 
             <div>
-              <h2 className="text-base font-semibold text-zinc-900">
-                {name}
-              </h2>
+              <h2 className="text-base font-semibold text-zinc-900">{name}</h2>
 
-              <p className="mt-0.5 text-xs text-zinc-400">
-                {entityId}
-              </p>
+              <p className="mt-0.5 text-xs text-zinc-400">{entityId}</p>
             </div>
           </div>
 
@@ -214,16 +211,12 @@ export function LightCard({
               >
                 {currentBrightness}
 
-                <span className="ml-1 text-lg text-zinc-400">
-                  %
-                </span>
+                <span className="ml-1 text-lg text-zinc-400">%</span>
               </p>
             </div>
 
             {loading && (
-              <span className="text-xs text-zinc-400">
-                Updating...
-              </span>
+              <span className="text-xs text-zinc-400">Updating...</span>
             )}
           </div>
 
@@ -234,21 +227,15 @@ export function LightCard({
             value={currentBrightness}
             disabled={loading}
             onChange={(event) => {
-              setPendingBrightness(
-                Number(event.target.value)
-              );
+              setPendingBrightness(Number(event.target.value));
             }}
             onMouseUp={(event) => {
-              const value = Number(
-                (event.target as HTMLInputElement).value
-              );
+              const value = Number((event.target as HTMLInputElement).value);
 
               void setBrightness(value);
             }}
             onTouchEnd={(event) => {
-              const value = Number(
-                (event.target as HTMLInputElement).value
-              );
+              const value = Number((event.target as HTMLInputElement).value);
 
               void setBrightness(value);
             }}

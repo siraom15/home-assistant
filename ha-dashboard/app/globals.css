@@ -24,3 +24,35 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@import "tailwindcss";
+
+body {
+  margin: 0;
+}
+
+.dashboard-panel {
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 28px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 14px 40px rgba(65, 50, 35, 0.06);
+}
+
+.temperature-button {
+  display: flex;
+  height: 32px;
+  width: 32px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid #cb6741;
+  color: #b95733;
+  transition: 0.2s ease;
+}
+
+.temperature-button:hover {
+  background: #c65a31;
+  color: white;
+}
