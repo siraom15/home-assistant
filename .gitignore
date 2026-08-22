@@ -4,6 +4,7 @@ secrets.yaml
 # Home Assistant runtime
 .storage/
 .cloud/
+.cache/
 
 # Database
 home-assistant_v2.db

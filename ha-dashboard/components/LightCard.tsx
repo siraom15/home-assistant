@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import type { HAState } from "@/lib/home-assistant/types";
-import { useHAState } from "@/hooks/useHAState";
 import { useHAEntity } from "@/hooks/useHAEntity";
 
 interface LightCardProps {
