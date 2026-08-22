@@ -15,6 +15,42 @@ interface HAWebSocketMessage {
     };
   };
 }
+interface HAWebSocketResult<T> {
+  id: number;
+  type: "result";
+  success: boolean;
+  result?: T;
+
+  error?: {
+    code: string;
+    message: string;
+  };
+}
+
+interface HAAuthMessage {
+  type:
+    | "auth_required"
+    | "auth_ok"
+    | "auth_invalid";
+
+  message?: string;
+}
+
+interface HAWebSocketCommand {
+  type: string;
+  [key: string]: unknown;
+}
+
+interface HAWebSocketResult<T> {
+  id: number;
+  type: "result";
+  success: boolean;
+  result?: T;
+  error?: {
+    code: string;
+    message: string;
+  };
+}
 
 export function subscribeStateChanges(
   onStateChanged: (state: HAState) => void
@@ -92,4 +128,93 @@ export function subscribeStateChanges(
   return () => {
     socket.close();
   };
+}
+
+export function callHAWebSocket<T>(
+  command: HAWebSocketCommand
+): Promise<T> {
+  return new Promise((resolve, reject) => {
+    const wsBaseUrl = haConfig.url
+      .replace(/^http:/, "ws:")
+      .replace(/^https:/, "wss:");
+
+    const socket = new WebSocket(
+      `${wsBaseUrl}/api/websocket`
+    );
+
+    const commandId = 1;
+
+    socket.addEventListener("message", (event) => {
+      const message = JSON.parse(
+        String(event.data)
+      ) as
+        | HAAuthMessage
+        | HAWebSocketResult<T>;
+
+      if (message.type === "auth_required") {
+        socket.send(
+          JSON.stringify({
+            type: "auth",
+            access_token: haConfig.token,
+          })
+        );
+
+        return;
+      }
+
+      if (message.type === "auth_ok") {
+        socket.send(
+          JSON.stringify({
+            id: commandId,
+            ...command,
+          })
+        );
+
+        return;
+      }
+
+      if (message.type === "auth_invalid") {
+        socket.close();
+
+        reject(
+          new Error(
+            message.message ??
+              "Home Assistant authentication failed"
+          )
+        );
+
+        return;
+      }
+
+      if (
+        message.type === "result" &&
+        message.id === commandId
+      ) {
+        socket.close();
+
+        if (!message.success) {
+          reject(
+            new Error(
+              message.error?.message ??
+                "Home Assistant WebSocket command failed"
+            )
+          );
+
+          return;
+        }
+
+        resolve(message.result as T);
+      }
+    });
+
+    socket.addEventListener("error", () => {
+      socket.close();
+
+      reject(
+        new Error(
+          "Home Assistant WebSocket connection failed"
+        )
+      );
+    });
+  });
 }
