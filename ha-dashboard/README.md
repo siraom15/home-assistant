@@ -34,3 +34,86 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+Project structure
+
+```txt
+ha-dashboard/
+├── app/
+│   ├── api/
+│   │   ├── ha/
+│   │   │   ├── events/
+│   │   │   │   └── route.ts
+│   │   │   └── bootstrap/
+│   │   │       └── route.ts
+│   │   │
+│   │   └── lights/
+│   │       └── control/
+│   │           └── route.ts
+│   │
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+│
+├── components/
+│   ├── dashboard/
+│   │   ├── Dashboard.tsx
+│   │   ├── DashboardShell.tsx
+│   │   ├── DashboardHeader.tsx
+│   │   ├── DashboardSidebar.tsx
+│   │   │
+│   │   ├── summary/
+│   │   │   ├── SummaryGrid.tsx
+│   │   │   └── SummaryCard.tsx
+│   │   │
+│   │   ├── areas/
+│   │   │   ├── AreaGrid.tsx
+│   │   │   ├── AreaCard.tsx
+│   │   │   └── AreaSection.tsx
+│   │   │
+│   │   └── entities/
+│   │       ├── EntityRenderer.tsx
+│   │       ├── LightCard.tsx
+│   │       ├── SensorCard.tsx
+│   │       └── UnknownEntityCard.tsx
+│   │
+│   └── ui/
+│       ├── SectionHeader.tsx
+│       ├── StatusBadge.tsx
+│       └── EmptyState.tsx
+│
+├── providers/
+│   └── HAStateProvider.tsx
+│
+├── hooks/
+│   ├── useHAEntity.ts
+│   ├── useHAEntities.ts
+│   ├── useHAArea.ts
+│   └── useHADomain.ts
+│
+├── lib/
+│   ├── home-assistant/
+│   │   ├── config.ts
+│   │   ├── http.ts
+│   │   ├── rest.ts
+│   │   ├── websocket.ts
+│   │   ├── types.ts
+│   │   │
+│   │   ├── registry/
+│   │   │   ├── areas.ts
+│   │   │   ├── devices.ts
+│   │   │   ├── entities.ts
+│   │   │   └── resolver.ts
+│   │   │
+│   │   └── entity-presentation.ts
+│   │
+│   └── dashboard/
+│       ├── types.ts
+│       ├── bootstrap.ts
+│       ├── model.ts
+│       ├── selectors.ts
+│       └── summary.ts
+│
+└── .env.local
+```
