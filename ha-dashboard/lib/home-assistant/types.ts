@@ -2,7 +2,7 @@ import type {
   HAAreaRegistryEntry,
   HADeviceRegistryEntry,
   HAEntityRegistryEntry,
-} from "./register/types";
+} from "./registry/types";
 
 export interface HAState {
   entity_id: string;
