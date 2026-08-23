@@ -1,4 +1,4 @@
-import { getDevices } from "@/lib/home-assistant/register/devices";
+import { getDevices } from "@/lib/home-assistant/registry/devices";
 
 export async function GET() {
   const devices = await getDevices();

@@ -1,4 +1,4 @@
-import { getEntities } from "@/lib/home-assistant/register/entities";
+import { getEntities } from "@/lib/home-assistant/registry/entities";
 
 export async function GET() {
 	const entities = await getEntities();

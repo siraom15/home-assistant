@@ -6,6 +6,8 @@ import type { HAState } from "@/lib/home-assistant/types";
 
 import { callHAWebSocket } from "@/lib/home-assistant/websocket";
 import type { HAAreaRegistryEntry } from "@/lib/home-assistant/registry/types";
+import { getHABootstrap } from "@/lib/home-assistant/bootstrap";
+import { buildDashboardModel } from "@/lib/dashboard/model";
 
 interface RoomDefinition {
   id: string;
@@ -70,6 +72,16 @@ const areas =
   });
 
 console.log(areas);
+
+const bootstrap = await getHABootstrap();
+const model = buildDashboardModel(bootstrap);
+
+console.log(
+  model.areas.map((area) => ({
+    name: area.name,
+    entities: area.entities.length,
+  })),
+);
   const automations = filterByDomain(states, "automation");
 
   const homeMode = states.find(

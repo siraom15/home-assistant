@@ -1,16 +1,21 @@
-import type {
-  HAAreaRegistryEntry,
-  HADeviceRegistryEntry,
-  HAEntityRegistryEntry,
-} from "../home-assistant/register/types";
-import { HAState } from "../home-assistant/types";
+export interface DashboardEntity {
+  entityId: string;
+  domain: string;
+  name: string;
 
-export interface HABootstrap {
-  states: HAState[];
+  areaId: string | null;
+  deviceId: string | null;
+}
 
-  areas: HAAreaRegistryEntry[];
+export interface DashboardArea {
+  id: string;
+  name: string;
+  icon: string | null;
 
-  devices: HADeviceRegistryEntry[];
+  entities: DashboardEntity[];
+}
 
-  entities: HAEntityRegistryEntry[];
+export interface DashboardModel {
+  areas: DashboardArea[];
+  unassigned: DashboardEntity[];
 }
