@@ -4,6 +4,9 @@ import { SensorCard } from "@/components/SensorCard";
 import { getAllStates } from "@/lib/home-assistant/rest";
 import type { HAState } from "@/lib/home-assistant/types";
 
+import { callHAWebSocket } from "@/lib/home-assistant/websocket";
+import type { HAAreaRegistryEntry } from "@/lib/home-assistant/registry/types";
+
 interface RoomDefinition {
   id: string;
   name: string;
@@ -61,6 +64,12 @@ export default async function Home() {
       entity.entity_id.startsWith("binary_sensor."),
   );
 
+const areas =
+  await callHAWebSocket<HAAreaRegistryEntry[]>({
+    type: "config/area_registry/list",
+  });
+
+console.log(areas);
   const automations = filterByDomain(states, "automation");
 
   const homeMode = states.find(
