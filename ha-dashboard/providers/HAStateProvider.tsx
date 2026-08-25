@@ -12,10 +12,11 @@ import {
 import type { HAState } from "@/lib/home-assistant/types";
 
 interface HAStateContextValue {
-  states: Record<string, HAState>; // ex. {'light.living_room' : state}
+  states: Record<string, HAState>;
 }
 
-const HAStateContext = createContext<HAStateContextValue | null>(null);
+const HAStateContext =
+  createContext<HAStateContextValue | null>(null);
 
 interface HAStateProviderProps {
   initialStates: HAState[];
@@ -26,36 +27,30 @@ export function HAStateProvider({
   initialStates,
   children,
 }: HAStateProviderProps) {
-  const [states, setStates] = useState<Record<string, HAState>>(() => {
-    return Object.fromEntries(
+  const [states, setStates] = useState<
+    Record<string, HAState>
+  >(() =>
+    Object.fromEntries(
       initialStates.map((state) => [
         state.entity_id,
         state,
-      ])
-    );
-  });
+      ]),
+    ),
+  );
 
   useEffect(() => {
-    const eventSource = new EventSource(
-      "/api/ha/events"
-    );
+    const eventSource =
+      new EventSource("/api/ha/events");
 
     eventSource.onmessage = (event) => {
-      const nextState = JSON.parse(
-        event.data
+      const state = JSON.parse(
+        event.data,
       ) as HAState;
 
       setStates((current) => ({
         ...current,
-        [nextState.entity_id]: nextState,
+        [state.entity_id]: state,
       }));
-    };
-
-    eventSource.onerror = (error) => {
-      console.error(
-        "Home Assistant event stream error:",
-        error
-      );
     };
 
     return () => {
@@ -67,7 +62,7 @@ export function HAStateProvider({
     () => ({
       states,
     }),
-    [states]
+    [states],
   );
 
   return (
@@ -77,12 +72,12 @@ export function HAStateProvider({
   );
 }
 
-export function useHAStates() {
+export function useHAStateContext() {
   const context = useContext(HAStateContext);
 
   if (!context) {
     throw new Error(
-      "useHAStates must be used inside HAStateProvider"
+      "useHAStateContext must be used inside HAStateProvider",
     );
   }
 

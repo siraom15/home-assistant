@@ -1,11 +1,11 @@
 "use client";
 
-import { useHAStates } from "@/components/HAStateProvider";
+import { useHAStates } from "./useHAState";
 
 export function useHAEntity(
-  entityId: string
+  entityId: string,
 ) {
-  const { states } = useHAStates();
+  const states = useHAStates();
 
   return states[entityId];
 }
