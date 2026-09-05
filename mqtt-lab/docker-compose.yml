@@ -1,0 +1,45 @@
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: mosquitto
+
+    ports:
+      - "1883:1883"
+
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+
+    restart: unless-stopped
+
+    networks:
+      - home-automation
+
+  fake-light:
+    image: python:3.13-slim
+    container_name: mqtt-fake-light
+
+    working_dir: /app
+
+    volumes:
+      - ./fake-device:/app
+
+    command: >
+      sh -c "
+      pip install --no-cache-dir -r requirements.txt &&
+      python app.py
+      "
+
+    depends_on:
+      - mosquitto
+
+    restart: unless-stopped
+
+    networks:
+      - home-automation
+
+networks:
+  home-automation:
+    external: true
+    name: home-automation-net

@@ -41,3 +41,79 @@ activate_sleep_mode:
     - action: scene.turn_on
       target:
         entity_id: scene.good_night
+
+request_home_mode:
+  alias: Request Home Mode
+  description: >-
+    Change the whole-home operating mode by updating
+    input_select.home_mode. Use this only when the user explicitly
+    requests Home, Night, Movie, Away, or Sleep mode.
+    Do not use this to control a single light or device.
+
+  fields:
+    mode:
+      name: Home mode
+      description: >-
+        Whole-home mode. Must be Home, Night, Movie, Away, or Sleep.
+      required: true
+      selector:
+        select:
+          options:
+            - Home
+            - Night
+            - Movie
+            - Away
+            - Sleep
+
+  mode: restart
+
+  sequence:
+    - alias: Prepare and validate requested mode
+      variables:
+        requested_mode: "{{ mode | default('', true) | trim }}"
+        allowed_modes: >-
+          {{ state_attr('input_select.home_mode', 'options') | default([], true) }}
+
+    - alias: Reject invalid mode
+      if:
+        - condition: template
+          value_template: "{{ requested_mode not in allowed_modes }}"
+      then:
+        - stop: >-
+            Invalid home mode '{{ requested_mode }}'.
+            Allowed modes are: {{ allowed_modes | join(', ') }}.
+          error: true
+
+    - alias: Update home mode source of truth
+      action: input_select.select_option
+      target:
+        entity_id: input_select.home_mode
+      data:
+        option: "{{ requested_mode }}"
+
+    - alias: Wait for home mode confirmation
+      wait_template: >-
+        {{ is_state('input_select.home_mode', requested_mode) }}
+      timeout:
+        seconds: 5
+      continue_on_timeout: true
+
+    - alias: Fail when mode was not confirmed
+      if:
+        - condition: template
+          value_template: "{{ not wait.completed }}"
+      then:
+        - stop: >-
+            Timed out waiting for input_select.home_mode
+            to change to '{{ requested_mode }}'.
+          error: true
+
+    - alias: Prepare response for the LLM
+      variables:
+        result:
+          status: confirmed
+          requested_mode: "{{ requested_mode }}"
+          actual_mode: "{{ states('input_select.home_mode') }}"
+
+    - stop: "Home mode changed to {{ requested_mode }}."
+      response_variable: result

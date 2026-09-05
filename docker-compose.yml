@@ -12,3 +12,24 @@ services:
       - TZ=Asia/Bangkok
     ports:
       - 8123:8123
+    networks:
+      - home-automation-net
+      
+  wyoming-whisper:
+    image: rhasspy/wyoming-whisper:latest
+    container_name: wyoming-whisper
+    restart: unless-stopped
+    command: --model small-int8 --language th
+    volumes:
+      - ./whisper-data:/data
+    networks:
+      - home-automation-net
+
+networks:
+  home-automation-net:
+    external: true
+
+networks:
+  home-automation:
+    external: true
+    name: home-automation-net
